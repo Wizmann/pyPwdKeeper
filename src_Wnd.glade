@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="registerWnd">
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkLabel" id="static_regWnd_lable">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">&#x6B22;&#x8FCE;&#x4F7F;&#x7528;pyPwdKeeper&#xFF0C;&#x8FD9;&#x662F;&#x60A8;&#x5728;&#x672C;&#x673A;&#x4E0A;&#x7B2C;&#x4E00;&#x6B21;&#x8FD0;&#x884C;&#x8BE5;&#x8F6F;&#x4EF6;&#x3002;
+&#x8BF7;&#x8F93;&#x5165;&#x60A8;&#x7684;&#x7BA1;&#x7406;&#x5BC6;&#x7801;&#x3002;
+&#x8BE5;&#x5BC6;&#x7801;&#x5341;&#x5206;&#x91CD;&#x8981;&#xFF0C;&#x8BF7;&#x59A5;&#x5584;&#x4FDD;&#x7BA1;&#xFF0C;&#x8BF7;&#x52FF;&#x544A;&#x8BC9;&#x4ED6;&#x4EBA;&#x3002;
+
+&#x5982;&#x679C;&#x60A8;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x5728;&#x672C;&#x673A;&#x4E0A;&#x8FD0;&#x884C;&#x8BE5;&#x8F6F;&#x4EF6;&#x3002;
+&#x90A3;&#x4E48;&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x6570;&#x636E;&#x5E93;&lt;b&gt;&lt;i&gt;&#x5DF2;&#x7ECF;&#x88AB;&#x7834;&#x574F;&lt;/i&gt;&lt;/b&gt;&#x3002;
+&#x4F46;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x7684;&#x662F;&#xFF0C;&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x662F;&#x7EDD;&#x5BF9;&#x5B89;&#x5168;&#x7684;&#x3002;
+</property>
+                <property name="use_markup">True</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox3">
+            <property name="visible">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">&#x8BF7;&#x8F93;&#x5165;&#x5BC6;&#x7801;&#xFF1A;       </property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">&#x25CF;</property>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox5">
+            <property name="visible">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">&#x8BF7;&#x518D;&#x6B21;&#x8F93;&#x5165;&#x5BC6;&#x7801;&#xFF1A;</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">&#x25CF;</property>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox4">
+            <property name="visible">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkHButtonBox" id="hbuttonbox1">
+                <property name="visible">True</property>
+                <property name="spacing">35</property>
+                <property name="layout_style">end</property>
+                <child>
+                  <object class="GtkButton" id="button1">
+                    <property name="label" translatable="yes">&#x786E;&#x8BA4;</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button2">
+                    <property name="label" translatable="yes">&#x9000;&#x51FA;</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
