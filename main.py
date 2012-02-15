@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*- 
 import sys
-import sqlite3
 import pygtk 
 import gtk
-from Crypto.Cipher import AES 
+from db import dbCtrl
 
 pygtk.require('2.0') 
 
@@ -46,7 +45,8 @@ class regWnd:
 				errorMsgBox.run()
 				errorMsgBox.destroy()
 			else:
-				pass
+				db=dbCtrl()
+				db.dbSetSuperPwd(self.pwdEntryA)
 		else:
 			errorMsgBox=gtk.MessageDialog(None, gtk.DIALOG_MODAL,
 										gtk.MESSAGE_ERROR, gtk.BUTTONS_OK,
@@ -57,7 +57,12 @@ class regWnd:
 	def main(self): 
 		gtk.main() 
 
-if(__name__ == "__main__"): 
-
-	newWnd=regWnd()
-	newWnd.main() 
+if(__name__ == "__main__"):
+	db=dbCtrl()
+	md5Pwd=db.dbGetSuperPwd()
+	if(md5Pwd!=None):
+		newWnd=regWnd()
+		newWnd.main() 
+	else:
+		newWnd=loginWnd()
+		
