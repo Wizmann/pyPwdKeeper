@@ -3,9 +3,13 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="registerWnd">
+    <property name="width_request">420</property>
+    <property name="height_request">300</property>
     <property name="title" translatable="yes">&#x6CE8;&#x518C;</property>
+    <property name="resizable">False</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon">src/mainIcon.ico</property>
+    <signal name="destroy" handler="gtk_main_quit"/>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
@@ -43,12 +47,13 @@
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">&#x6B22;&#x8FCE;&#x4F7F;&#x7528;pyPwdKeeper&#xFF0C;&#x8FD9;&#x662F;&#x60A8;&#x5728;&#x672C;&#x673A;&#x4E0A;&#x7B2C;&#x4E00;&#x6B21;&#x8FD0;&#x884C;&#x8BE5;&#x8F6F;&#x4EF6;&#x3002;
 &#x8BF7;&#x8F93;&#x5165;&#x60A8;&#x7684;&#x7BA1;&#x7406;&#x5BC6;&#x7801;&#x3002;
-&#x8BE5;&#x5BC6;&#x7801;&#x5341;&#x5206;&#x91CD;&#x8981;&#xFF0C;&#x8BF7;&#x59A5;&#x5584;&#x4FDD;&#x7BA1;&#xFF0C;&#x8BF7;&#x52FF;&#x544A;&#x8BC9;&#x4ED6;&#x4EBA;&#x3002;
-
+&#x8BE5;&#x5BC6;&#x7801;&lt;b&gt;&lt;i&gt;&#x5341;&#x5206;&#x91CD;&#x8981;&lt;/i&gt;&lt;/b&gt;&#xFF0C;&#x8BF7;&#x59A5;&#x5584;&#x4FDD;&#x7BA1;&#xFF0C;&#x8BF7;&#x52FF;&#x544A;&#x8BC9;&#x4ED6;&#x4EBA;&#x3002;
 &#x5982;&#x679C;&#x60A8;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x5728;&#x672C;&#x673A;&#x4E0A;&#x8FD0;&#x884C;&#x8BE5;&#x8F6F;&#x4EF6;&#x3002;
 &#x90A3;&#x4E48;&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x6570;&#x636E;&#x5E93;&lt;b&gt;&lt;i&gt;&#x5DF2;&#x7ECF;&#x88AB;&#x7834;&#x574F;&lt;/i&gt;&lt;/b&gt;&#x3002;
 &#x4F46;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x7684;&#x662F;&#xFF0C;&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x662F;&#x7EDD;&#x5BF9;&#x5B89;&#x5168;&#x7684;&#x3002;
-</property>
+
+
+&#x5BC6;&#x7801;&#x4E3A;8~16&#x4F4D;&#xFF0C;&lt;b&gt;&#x8BF7;&#x52FF;&#x4F7F;&#x7528;&#x7B80;&#x5355;&#x5BC6;&#x7801;&#xFF01;&lt;/b&gt;</property>
                 <property name="use_markup">True</property>
               </object>
               <packing>
@@ -94,7 +99,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry1">
+              <object class="GtkEntry" id="pwdEntryA">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="visibility">False</property>
@@ -138,7 +143,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry2">
+              <object class="GtkEntry" id="pwdEntryB">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="visibility">False</property>
