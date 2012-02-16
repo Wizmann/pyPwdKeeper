@@ -15,9 +15,10 @@ if(__name__ == "__main__"):
 	md5Pwd=db.dbGetSuperPwd()
 	if(md5Pwd==None):
 		newRegWnd=regWnd()
-		newRegWnd.main() 
+		newRegWnd.main()
 	
 	if(globeCtrl.gCtrl.quit==True):
+		print("EXIT")
 		exit(0)
 	
 	#如果没有用户的密码，则要求注册

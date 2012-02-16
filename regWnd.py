@@ -14,6 +14,7 @@ class regWnd:
 		self.gladeMain = gtk.Builder() 
 		self.gladeMain.add_from_file(self.gladeFile) 
 		self.gladeMain.connect_signals(self)
+		
 		self.mainWindow = self.gladeMain.get_object("registerWnd")
 		self.mainWindow.set_position(gtk.WIN_POS_CENTER_ALWAYS) 
 		self.mainWindow.set_default_size(420, 300) 
@@ -22,11 +23,12 @@ class regWnd:
 		self.pwdEntryB=None
 		
 	def gtk_main_quit(self, widget, data=None):
-		gtk.main_quit()
-		
-	def on_cmdQuit_clicked(self,*args): 
 		globeCtrl.gCtrl.setQuit(True)
-		gtk.main_quit() 
+		gtk.main_quit()
+	
+	def on_regQuit_clicked(self,*args): 
+		globeCtrl.gCtrl.setQuit(True)
+		gtk.main_quit()
 
 	def getPwdEntry(self):#获取窗口密码框的文字
 		self.pwdEntryA=self.gladeMain.get_object('pwdEntryA').get_text()
@@ -34,7 +36,7 @@ class regWnd:
 		#print self.pwdEntryA
 		#print self.pwdEntryB
 		
-	def on_cmdOK_clicked(self,*args): 
+	def on_regOK_clicked(self,*args): 
 		self.getPwdEntry()
 		if(len(self.pwdEntryA)>=8 and len(self.pwdEntryA)<=16 and
 				len(self.pwdEntryB)>=8 and len(self.pwdEntryB)<=16):
@@ -48,7 +50,9 @@ class regWnd:
 			else:
 				db=dbCtrl()
 				db.dbSetSuperPwd(self.pwdEntryA)
-				gtk.main_quit()
+				gtk.Widget.destroy(self.mainWindow)
+				globeCtrl.gCtrl.setQuit(False)
+
 		else:
 			errorMsgBox=gtk.MessageDialog(None, gtk.DIALOG_MODAL,
 										gtk.MESSAGE_ERROR, gtk.BUTTONS_OK,
@@ -57,4 +61,4 @@ class regWnd:
 			errorMsgBox.run()
 			errorMsgBox.destroy()
 	def main(self): 
-		gtk.main() 
+		gtk.main()

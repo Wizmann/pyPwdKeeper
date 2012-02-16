@@ -21,6 +21,7 @@ class loginWnd:
 		self.pwdEntry=None
 	
 	def gtk_main_quit(self, widget, data=None):
+		globeCtrl.gCtrl.setQuit(True)
 		gtk.main_quit()
 	
 	def on_loginWndOK_clicked(self,*args):
@@ -30,7 +31,6 @@ class loginWnd:
 		if(ret!=None):
 			globeCtrl.gCtrl.setLogin(True)
 			globeCtrl.gCtrl.setUsrEncodePwd(ret)
-			print ret
 		else:
 			errorMsgBox=gtk.MessageDialog(None,gtk.DIALOG_MODAL,
 											gtk.MESSAGE_ERROR,gtk.BUTTONS_OK,
