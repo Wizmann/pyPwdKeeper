@@ -31,6 +31,9 @@ class loginWnd:
 		if(ret!=None):
 			globeCtrl.gCtrl.setLogin(True)
 			globeCtrl.gCtrl.setUsrEncodePwd(ret)
+			
+			gtk.Widget.destroy(self.mainWindow)
+			globeCtrl.gCtrl.setQuit(False)
 		else:
 			errorMsgBox=gtk.MessageDialog(None,gtk.DIALOG_MODAL,
 											gtk.MESSAGE_ERROR,gtk.BUTTONS_OK,

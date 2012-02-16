@@ -2,8 +2,28 @@
 # -*- encoding: utf-8 -*- 
 import sys
 import sqlite3
+import globeCtrl
 from Crypto.Hash import MD5,SHA
 from Crypto.Cipher import AES
+
+PADDING = '\0' 
+padIt = lambda s: s+(16 - len(s)%16)*PADDING 
+
+def AES_Encode(str_key,str_inputText):
+	obj = AES.new(self.key, AES.MODE_ECB)     
+	crypt = obj.encrypt(inputText)
+	print crypt
+	return crypt
+	
+def AES_Decode(str_key,str_inputText):
+	inputText=binascii.a2b_hex(inputText)
+	obj = AES.new(self.key, AES.MODE_ECB)     
+	crypt = obj.decrypt(inputText)
+	tempStr=''
+	for item in crypt:
+		if(item!='\0'): tempStr += str(item)
+	print tempStr
+	return tempStr
 
 class dbCtrl:
 	def __init__(self):
@@ -46,4 +66,60 @@ class dbCtrl:
 			returnCode.update(str_pwd)
 			return returnCode.hexdigest()
 		else: return None
+		
+	def dbInitMainTable(self):
+		db=sqlite3.connect(self.dbFile)
+		cur=db.cursor()
+		try:
+			cur.execute("CREATE TABLE IF NOT EXISTS mainPwd\
+						(\
+							pwdName TEXE UNIQUE NOT NULL,\
+							pwd TEXT NOT NULL\
+						)")
+		except:
+			print("InitMainTable Error")
+		
+		db.close()
+	def dbInsertIntoMainTable(self,str_name,str_pwd):
+		db=sqlite3.connect(self.dbFile)
+		cur=db.cursor()
+		try:
+			cur.execute("INSERT INTO mainPwd (pwdName,pwd) VALUES\
+							(\""+str_name+"\",\""+str_pwd+"\")")
+		except:
+			print("InsertIntoMainTable Error")
+		
+		db.close()
+	
+	def dbGetMainTableName(self):
+		db=sqlite3.connect(self.dbFile)
+		cur=db.cursor()
+		
+		try:
+			cur.execute("SELECT pwdName FROM mainPwd")
+			resList=cur.fetchall()
+			print resList
+			db.close()
+			return resList
+		except:
+			print("GetMainTableName ERROR")
+			db.close()
+			return None
+			
+	def dbGetPwd(self,str_name):
+		db=sqlite3.connect(self.dbFile)
+		cur=db.cursor()
+		
+		try:
+			cur.execute("SELECT * FROM mainPwd where pwdName==\""+str_name+"\"")
+			resList=cur.fetchone()
+			db.close()
+			retStr=AES_Decode(resList[1],globeCtrl.gCtrl.usrEncodePwd)
+			print retStr
+			return retStr
+		except:
+			print("GetPwd ERROR")
+			db.close()
+			return None
+		
 

@@ -58,7 +58,7 @@ class regWnd:
 										gtk.MESSAGE_ERROR, gtk.BUTTONS_OK,
 										u'错误')
 			errorMsgBox.format_secondary_text(u"密码长度错误！")
-			errorMsgBox.run()
+			response=errorMsgBox.run()
 			errorMsgBox.destroy()
 	def main(self): 
 		gtk.main()
