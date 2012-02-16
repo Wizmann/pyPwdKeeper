@@ -3,6 +3,7 @@
 import sys
 import pygtk 
 import gtk
+import globeCtrl
 from db import dbCtrl
 
 pygtk.require('2.0') 
@@ -23,9 +24,9 @@ class regWnd:
 	def gtk_main_quit(self, widget, data=None):
 		gtk.main_quit()
 		
-	def on_cmdQuit_clicked(self, *args): 
-		 print "on_cmdCancel_clicked" 
-		 gtk.main_quit() 
+	def on_cmdQuit_clicked(self,*args): 
+		globeCtrl.gCtrl.setQuit(True)
+		gtk.main_quit() 
 
 	def getPwdEntry(self):#获取窗口密码框的文字
 		self.pwdEntryA=self.gladeMain.get_object('pwdEntryA').get_text()
@@ -33,7 +34,7 @@ class regWnd:
 		#print self.pwdEntryA
 		#print self.pwdEntryB
 		
-	def on_cmdOK_clicked(self, *args): 
+	def on_cmdOK_clicked(self,*args): 
 		self.getPwdEntry()
 		if(len(self.pwdEntryA)>=8 and len(self.pwdEntryA)<=16 and
 				len(self.pwdEntryB)>=8 and len(self.pwdEntryB)<=16):
@@ -47,6 +48,7 @@ class regWnd:
 			else:
 				db=dbCtrl()
 				db.dbSetSuperPwd(self.pwdEntryA)
+				gtk.main_quit()
 		else:
 			errorMsgBox=gtk.MessageDialog(None, gtk.DIALOG_MODAL,
 										gtk.MESSAGE_ERROR, gtk.BUTTONS_OK,

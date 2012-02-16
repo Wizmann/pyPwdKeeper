@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*- 
 import sys
 import sqlite3
-from Crypto.Hash import MD5
+from Crypto.Hash import MD5,SHA
 from Crypto.Cipher import AES
 
 class dbCtrl:
@@ -36,4 +36,14 @@ class dbCtrl:
 			print("ERROR")
 
 		db.close()
+	
+	def dbCheckSuperPwd(self,str_pwd):
+		encodePwd = MD5.new()
+		encodePwd.update(str_pwd)
+		encodePwd=encodePwd.hexdigest()
+		if(self.dbGetSuperPwd()==encodePwd):
+			returnCode = SHA.new()
+			returnCode.update(str_pwd)
+			return returnCode.hexdigest()
+		else: return None
 

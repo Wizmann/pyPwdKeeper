@@ -47,10 +47,10 @@
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">&#x6B22;&#x8FCE;&#x4F7F;&#x7528;pyPwdKeeper&#xFF0C;&#x8FD9;&#x662F;&#x60A8;&#x5728;&#x672C;&#x673A;&#x4E0A;&#x7B2C;&#x4E00;&#x6B21;&#x8FD0;&#x884C;&#x8BE5;&#x8F6F;&#x4EF6;&#x3002;
 &#x8BF7;&#x8F93;&#x5165;&#x60A8;&#x7684;&#x7BA1;&#x7406;&#x5BC6;&#x7801;&#x3002;
-&#x8BE5;&#x5BC6;&#x7801;&lt;b&gt;&lt;i&gt;&#x5341;&#x5206;&#x91CD;&#x8981;&lt;/i&gt;&lt;/b&gt;&#xFF0C;&#x8BF7;&#x59A5;&#x5584;&#x4FDD;&#x7BA1;&#xFF0C;&#x8BF7;&#x52FF;&#x544A;&#x8BC9;&#x4ED6;&#x4EBA;&#x3002;
+&#x8BE5;&#x5BC6;&#x7801;&lt;b&gt;&lt;i&gt;&#x5341;&#x5206;&#x91CD;&#x8981;&lt;/i&gt;&lt;/b&gt;&#xFF0C;&#x8BF7;&#x59A5;&#x5584;&#x4FDD;&#x7BA1;&#xFF0C;&#x4E00;&#x65E6;&#x4E22;&#x5931;&#x5C31;&#x65E0;&#x6CD5;&#x6062;&#x590D;&#x3002;
 &#x5982;&#x679C;&#x60A8;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x5728;&#x672C;&#x673A;&#x4E0A;&#x8FD0;&#x884C;&#x8BE5;&#x8F6F;&#x4EF6;&#x3002;
 &#x90A3;&#x4E48;&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x6570;&#x636E;&#x5E93;&lt;b&gt;&lt;i&gt;&#x5DF2;&#x7ECF;&#x88AB;&#x7834;&#x574F;&lt;/i&gt;&lt;/b&gt;&#x3002;
-&#x4F46;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x7684;&#x662F;&#xFF0C;&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x662F;&#x7EDD;&#x5BF9;&#x5B89;&#x5168;&#x7684;&#x3002;
+&#x4F46;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x7684;&#x662F;&#xFF0C;&#x60A8;&#x7684;&#x5BC6;&#x7801;&#x5E76;&#x6CA1;&#x6709;&#x88AB;&#x6CC4;&#x9732;&#x3002;
 
 
 &#x5BC6;&#x7801;&#x4E3A;8~16&#x4F4D;&#xFF0C;&lt;b&gt;&#x8BF7;&#x52FF;&#x4F7F;&#x7528;&#x7B80;&#x5355;&#x5BC6;&#x7801;&#xFF01;&lt;/b&gt;</property>
@@ -254,18 +254,45 @@
       </object>
     </child>
   </object>
-  <object class="GtkWindow" id="window1">
+  <object class="GtkWindow" id="loginWnd">
+    <property name="title" translatable="yes">&#x767B;&#x5F55;</property>
+    <property name="window_position">center</property>
+    <property name="icon">src/mainIcon.ico</property>
+    <signal name="destroy" handler="gtk_main_quit"/>
     <child>
       <object class="GtkVBox" id="vbox2">
         <property name="visible">True</property>
         <child>
-          <placeholder/>
+          <object class="GtkAspectFrame" id="aspectframe12">
+            <property name="height_request">5</property>
+            <property name="visible">True</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
         </child>
         <child>
           <object class="GtkHBox" id="hbox2">
             <property name="visible">True</property>
             <child>
-              <placeholder/>
+              <object class="GtkAspectFrame" id="aspectframe7">
+                <property name="width_request">30</property>
+                <property name="height_request">81</property>
+                <property name="visible">True</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label3">
@@ -277,9 +304,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry1">
+              <object class="GtkEntry" id="loginPwdEntry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="visibility">False</property>
                 <property name="invisible_char">&#x25CF;</property>
               </object>
               <packing>
@@ -287,7 +315,19 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkAspectFrame" id="aspectframe8">
+                <property name="width_request">30</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="position">3</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -298,14 +338,37 @@
           <object class="GtkHBox" id="hbox6">
             <property name="visible">True</property>
             <child>
-              <placeholder/>
+              <object class="GtkAspectFrame" id="aspectframe9">
+                <property name="visible">True</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkAspectFrame" id="aspectframe10">
+                <property name="width_request">100</property>
+                <property name="visible">True</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
             </child>
             <child>
               <object class="GtkHButtonBox" id="hbuttonbox2">
                 <property name="visible">True</property>
+                <property name="spacing">5</property>
+                <property name="layout_style">end</property>
                 <child>
                   <object class="GtkButton" id="loginWndOK">
                     <property name="label" translatable="yes">&#x767B;&#x5F55;</property>
@@ -313,6 +376,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <accelerator key="Return" signal="clicked"/>
+                    <signal name="clicked" handler="on_loginWndOK_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -321,11 +385,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button2">
+                  <object class="GtkButton" id="loginWndQuit">
                     <property name="label" translatable="yes">&#x9000;&#x51FA;</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_loginWndQuit_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -339,11 +404,36 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkAspectFrame" id="aspectframe11">
+                <property name="width_request">15</property>
+                <property name="visible">True</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="position">3</property>
+              </packing>
             </child>
           </object>
           <packing>
             <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkAspectFrame" id="aspectframe13">
+            <property name="height_request">5</property>
+            <property name="visible">True</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
