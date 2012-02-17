@@ -19,7 +19,7 @@ def pwgen():
 	
 class inputWnd:
 	def __init__(self,str_name=None): 
-		self.gladeFile="src_Wnd.glade"
+		self.gladeFile=sys.path[0]+"/src_Wnd.glade"
 		self.gladeMain = gtk.Builder() 
 		self.gladeMain.add_from_file(self.gladeFile) 
 		self.gladeMain.connect_signals(self)

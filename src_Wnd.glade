@@ -443,6 +443,7 @@
   <object class="GtkListStore" id="liststore1"/>
   <object class="GtkWindow" id="mainWnd">
     <property name="title" translatable="yes">&#x5BC6;&#x7801;&#x4FDD;&#x9669;&#x7BB1;</property>
+    <property name="icon">mainIcon.ico</property>
     <signal name="destroy" handler="gtk_main_quit"/>
     <child>
       <object class="GtkVBox" id="vbox3">
@@ -534,6 +535,7 @@
                 <property name="headers_clickable">False</property>
                 <property name="enable_grid_lines">horizontal</property>
                 <property name="enable_tree_lines">True</property>
+                <signal name="unselect_all" handler="on_mainTreeView_unselect_all"/>
                 <signal name="cursor_changed" handler="on_mainTreeView_cursor_changed"/>
                 <signal name="row_activated" handler="on_mainTreeView_row_activated"/>
               </object>

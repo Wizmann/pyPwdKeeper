@@ -11,14 +11,15 @@ pygtk.require('2.0')
 
 class mainWnd:
 	def __init__(self): 
-		self.gladeFile="src_Wnd.glade"
+		self.gladeFile=sys.path[0]+"/src_Wnd.glade"
 		self.gladeMain = gtk.Builder() 
 		self.gladeMain.add_from_file(self.gladeFile) 
 		self.gladeMain.connect_signals(self)
 		self.mainWindow = self.gladeMain.get_object("mainWnd")
 		self.mainWindow.set_position(gtk.WIN_POS_CENTER_ALWAYS) 
 		self.mainWindow.set_default_size(400, 320) 
-		
+		self.mainWindow.set_icon_from_file(sys.path[0]+"/src/mainIcon.ico")
+
 		self.mainTreeView=self.gladeMain.get_object('mainTreeView')
 		column = gtk.TreeViewColumn('pwd', gtk.CellRendererText(),text=0)
 		column.set_resizable(True)
@@ -51,16 +52,22 @@ class mainWnd:
 		infoMsgBox.destroy()
 		
 	def on_mainDelPwd_clicked(self,*args):
+		if(self.selectedRow==-1):
+			return
 		iter=self.mainList.get_iter(self.selectedRow)
 		value=self.mainList.get_value(iter,0)
 		db=dbCtrl()
 		#print(value)
 		db.dbDelPwd(value)
 		self.refreshMainTreeView()
+		self.selectedRow=-1
 		
 	
 	def on_mainTreeView_cursor_changed(self,*args):
-		self.selectedRow = self.mainTreeView.get_cursor()[0][0]
+		try:
+			self.selectedRow = self.mainTreeView.get_cursor()[0][0]
+		except:
+			self.selectedRow = -1
 		#print self.selectedRow
 	
 	def refreshMainTreeView(self):
@@ -90,6 +97,9 @@ class mainWnd:
 		aboutDialog = self.gladeMain.get_object("aboutWnd")
 		response=aboutDialog.run()
 		aboutDialog.hide()
+	
+	def on_mainTreeView_unselect_all(self,*args):
+		self.selectedRow = -1
 		
 	def gtk_main_quit(self, widget, data=None):
 		gtk.main_quit()

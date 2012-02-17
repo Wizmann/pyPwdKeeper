@@ -10,7 +10,7 @@ pygtk.require('2.0')
 
 class regWnd:
 	def __init__(self): 
-		self.gladeFile="src_Wnd.glade"
+		self.gladeFile=sys.path[0]+"/src_Wnd.glade"
 		self.gladeMain = gtk.Builder() 
 		self.gladeMain.add_from_file(self.gladeFile) 
 		self.gladeMain.connect_signals(self)

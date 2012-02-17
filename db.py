@@ -36,7 +36,7 @@ def AES_Decode(str_key,str_inputText):
 
 class dbCtrl:
 	def __init__(self):
-		self.dbFile="./pwd.db"
+		self.dbFile=sys.path[0]+"/pwd.db"
 		self.key=None
 		if(globeCtrl.gCtrl.usrEncodePwd!=None):
 			self.key=padIt(globeCtrl.gCtrl.usrEncodePwd)
