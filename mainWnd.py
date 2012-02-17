@@ -5,6 +5,7 @@ import pygtk
 import gtk
 import globeCtrl
 from db import dbCtrl
+from inputWnd import inputWnd
 
 pygtk.require('2.0')
 
@@ -49,7 +50,14 @@ class mainWnd:
 		infoMsgBox.run()
 		infoMsgBox.destroy()
 		
+	def on_mainDelPwd_clicked(self,*args):
+		iter=self.mainList.get_iter(self.selectedRow)
+		value=self.mainList.get_value(iter,0)
+		db=dbCtrl()
+		db.dbDelPwd(value)
+		self.refreshMainTreeView()
 		
+	
 	def on_mainTreeView_cursor_changed(self,*args):
 		self.selectedRow = self.mainTreeView.get_cursor()[0][0]
 		#print self.selectedRow
@@ -66,7 +74,9 @@ class mainWnd:
 		gtk.main_quit()
 	
 	def on_mainAddNew_clicked(self,*args):
-		
+		newInputWnd=inputWnd()
+		newInputWnd.main()
+		self.refreshMainTreeView()
 		
 	def on_mainAbout_clicked(self,*args):
 		aboutDialog = self.gladeMain.get_object("aboutWnd")

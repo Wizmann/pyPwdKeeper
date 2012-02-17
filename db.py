@@ -3,11 +3,20 @@
 import sys
 import sqlite3
 import globeCtrl
+import binascii 
 from Crypto.Hash import MD5,SHA
 from Crypto.Cipher import AES
 
 PADDING = '\0' 
-padIt = lambda s: s+(16 - len(s)%16)*PADDING 
+
+def padIt(inStr):
+	retStr=""
+	for i in xrange(32):
+		if(i<len(inStr)):
+			retStr+=inStr[i]
+		else:
+			retStr+='\0'
+	return retStr
 
 def AES_Encode(str_key,str_inputText):
 	obj = AES.new(self.key, AES.MODE_ECB)     
@@ -28,6 +37,10 @@ def AES_Decode(str_key,str_inputText):
 class dbCtrl:
 	def __init__(self):
 		self.dbFile="./pwd.db"
+		self.key=None
+		if(globeCtrl.gCtrl.usrEncodePwd!=None):
+			self.key=padIt(globeCtrl.gCtrl.usrEncodePwd)
+		
 		
 	def dbGetSuperPwd(self):
 		db=sqlite3.connect(self.dbFile)
@@ -70,6 +83,7 @@ class dbCtrl:
 	def dbInitMainTable(self):
 		db=sqlite3.connect(self.dbFile)
 		cur=db.cursor()
+		
 		try:
 			cur.execute("CREATE TABLE IF NOT EXISTS mainPwd\
 						(\
@@ -83,9 +97,15 @@ class dbCtrl:
 	def dbInsertIntoMainTable(self,str_name,str_pwd):
 		db=sqlite3.connect(self.dbFile)
 		cur=db.cursor()
+		
+		str_pwd=padIt(str_pwd)
+		obj = AES.new(self.key, AES.MODE_ECB)     
+		crypt = obj.encrypt(str_pwd)
+		print binascii.b2a_hex(crypt)
 		try:
 			cur.execute("INSERT INTO mainPwd (pwdName,pwd) VALUES\
-							(\""+str_name+"\",\""+str_pwd+"\")")
+							(\""+str_name+"\",\""+binascii.b2a_hex(crypt)+"\")")
+			db.commit() 
 		except:
 			print("InsertIntoMainTable Error")
 		
@@ -114,12 +134,38 @@ class dbCtrl:
 			cur.execute("SELECT * FROM mainPwd where pwdName==\""+str_name+"\"")
 			resList=cur.fetchone()
 			db.close()
-			retStr=AES_Decode(resList[1],globeCtrl.gCtrl.usrEncodePwd)
-			print retStr
-			return retStr
+			inputText=binascii.a2b_hex(resList[1])
+			obj = AES.new(self.key, AES.MODE_ECB)     
+			crypt = obj.decrypt(inputText)
+			pwd=''
+			for item in crypt:
+				if(item!='\0'): pwd += str(item)
+			return pwd
 		except:
 			print("GetPwd ERROR")
 			db.close()
 			return None
+	
+	def dbDelPwd(self,str_name):
+		db=sqlite3.connect(self.dbFile)
+		cur=db.cursor()
 		
+		try:
+			cur.execute("DELETE FROM mainPwd where pwdName==\""+str_name+"\"")
+		except:
+			print("DelPwd Error")
+		
+		db.close()
+		
+	def dpUpdatePwd(self,str_name,str_pwd):
+		db=sqlite3.connect(self.dbFile)
+		cur=db.cursor()
+		
+		try:
+			cur.execute("UPDATE mainPwd \
+							SET pwd=\""+str_pwd+"\" where pwdName==\""+str_name+"\"")
+		except:
+			print("UpdatePwd Error")
+		
+		db.close()
 
