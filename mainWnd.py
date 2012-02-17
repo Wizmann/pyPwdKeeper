@@ -54,6 +54,7 @@ class mainWnd:
 		iter=self.mainList.get_iter(self.selectedRow)
 		value=self.mainList.get_value(iter,0)
 		db=dbCtrl()
+		#print(value)
 		db.dbDelPwd(value)
 		self.refreshMainTreeView()
 		
@@ -69,6 +70,13 @@ class mainWnd:
 		pwdList=db.dbGetMainTableName()
 		for item in pwdList:
 			self.mainList.append(item)
+	
+	def on_mainModifyPwd_clicked(self,*args):
+		iter=self.mainList.get_iter(self.selectedRow)
+		value=self.mainList.get_value(iter,0)
+		newInputWnd=inputWnd(value)
+		newInputWnd.main()
+		self.refreshMainTreeView()
 	
 	def gtk_main_quit(self, widget, data=None):
 		gtk.main_quit()

@@ -151,7 +151,9 @@ class dbCtrl:
 		cur=db.cursor()
 		
 		try:
+			print("DELETE FROM mainPwd where pwdName==\""+str_name+"\"")
 			cur.execute("DELETE FROM mainPwd where pwdName==\""+str_name+"\"")
+			db.commit()
 		except:
 			print("DelPwd Error")
 		
@@ -160,10 +162,13 @@ class dbCtrl:
 	def dpUpdatePwd(self,str_name,str_pwd):
 		db=sqlite3.connect(self.dbFile)
 		cur=db.cursor()
-		
+		str_pwd=padIt(str_pwd)
+		obj = AES.new(self.key, AES.MODE_ECB)     
+		crypt = obj.encrypt(str_pwd)
 		try:
 			cur.execute("UPDATE mainPwd \
-							SET pwd=\""+str_pwd+"\" where pwdName==\""+str_name+"\"")
+							SET pwd=\""+binascii.b2a_hex(crypt)+"\" where pwdName==\""+str_name+"\"")
+			db.commit()
 		except:
 			print("UpdatePwd Error")
 		

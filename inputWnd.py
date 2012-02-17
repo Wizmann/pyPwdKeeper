@@ -26,7 +26,7 @@ class inputWnd:
 		
 		self.mainWindow = self.gladeMain.get_object("inputWnd")
 		self.mainWindow.set_position(gtk.WIN_POS_CENTER_ALWAYS) 
-		self.mainWindow.set_default_size(400,250) 
+		self.mainWindow.set_default_size(400,300) 
 		self.mainWindow.show()
 		
 		self.entryName=str_name
@@ -34,7 +34,7 @@ class inputWnd:
 		self.newEntry=True
 		if(str_name!=None):
 			self.newEntry=False
-			self.gladeMain.get_object('inputEntryName').editable=False
+			self.gladeMain.get_object('inputEntryName').set_editable(False)
 			db=dbCtrl()
 			self.entryPwd=db.dbGetPwd(str_name)
 			if(self.entryPwd==None):
@@ -81,7 +81,7 @@ class inputWnd:
 		if(self.newEntry==True):
 			db.dbInsertIntoMainTable(str_name,str_pwd)
 		else:
-			db.dbUpdateIntoMainTalbe(str_name,str_pwd)
+			db.dpUpdatePwd(str_name,str_pwd)
 		
 		gtk.Widget.destroy(self.mainWindow)
 			
